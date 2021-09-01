@@ -1,15 +1,6 @@
 const API_KEY = '1030453-4271fa747ef92e686e2b519ac';
 const BASE_URL = 'https://pixabay.com/api/';
 
-// const fetchCountries = async function (searchQuery = '', page) {
-//   const response = await fetch(
-//     `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${searchQuery}&page=${page}&per_page=12&key=${API_KEY}`,
-//   );
-//   return await response.json();
-// };
-
-// export default { fetchCountries };
-
 export default class ImageApiService {
   constructor() {
     this.searchQuery = '';
