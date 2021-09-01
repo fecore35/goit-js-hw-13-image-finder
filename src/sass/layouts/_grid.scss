@@ -1,0 +1,22 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+.grid__item {
+  margin-top: 10px;
+  margin-left: 10px;
+  flex-basis: calc((100% - 10px * var(--grid-item)) / var(--grid-item));
+}
+
+.grid--stats {
+  justify-content: space-between;
+  text-align: center;
+}
+
+.stats-item {
+  font-size: 0.75em;
+}

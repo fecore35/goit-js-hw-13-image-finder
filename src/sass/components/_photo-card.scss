@@ -1,0 +1,54 @@
+.photo-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-card__image {
+  width: 100%;
+  display: block;
+}
+
+.stats {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: linear-gradient(to right, white, transparent);
+  transform: translateX(-25px);
+  transition: 0.25s;
+  opacity: 0;
+
+  .photo-card:hover & {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.stats-item {
+  margin: 0;
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.material-icons {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.photo-card__link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+}

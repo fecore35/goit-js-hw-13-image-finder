@@ -1,0 +1,25 @@
+:root {
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --main-text-color: #757575;
+  --color-text: #212121;
+  --color-text-w: #ffffff;
+  --color-accent: #2196f3;
+  --color-background-dark: #2f303a;
+  --color-background-btn: #f5f4fa;
+  --background-btn-focus: #188ce8;
+  --grid-item: 2;
+  --padding-section: 60px;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --grid-item: 3;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  :root {
+    --grid-item: 4;
+    --padding-section: 94px;
+  }
+}
