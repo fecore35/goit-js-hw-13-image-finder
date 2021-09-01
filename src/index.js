@@ -1,14 +1,14 @@
 import { notificationStack, notificationNotFound } from './js/notification';
 import debounce from 'lodash.debounce';
 import getRefs from './js/refs';
-import ImageApiService from './js/apiService.js';
+import AsyncImageApiService from './js/async-apiService';
 import LoadMoreBtn from './js/loadMoreBtn';
 import lightboxImage from './js/modal';
 import tplImage from './templates/cart-image.hbs';
 import './sass/main.scss';
 
 const refs = getRefs();
-const imageApiService = new ImageApiService();
+const aImageApiService = new AsyncImageApiService();
 const loadMoreBtn = new LoadMoreBtn({ selector: '#load-more', hidden: true });
 
 refs.searchForm.addEventListener('submit', e => {
@@ -19,15 +19,15 @@ refs.searchForm.addEventListener('input', debounce(onSearch, 350));
 refs.galleryContainer.addEventListener('click', onModal);
 loadMoreBtn.button.addEventListener('click', onLoadMore);
 
-function onSearch(event) {
-  imageApiService.query = event.target.value;
+async function onSearch(event) {
+  aImageApiService.query = event.target.value;
 
-  loadMoreBtn.disable();
   loadMoreBtn.show();
+  loadMoreBtn.disable();
 
-  imageApiService.resetPage();
+  aImageApiService.resetPage();
 
-  if (imageApiService.query === '') {
+  if (aImageApiService.query === '') {
     clearGalleryContainer();
     notificationStack.close();
     loadMoreBtn.enable();
@@ -35,30 +35,31 @@ function onSearch(event) {
     return;
   }
 
-  imageApiService
-    .fetchCountries()
-    .then(images => {
-      clearGalleryContainer();
-      loadMoreBtn.show();
-
-      loadMoreBtn.enable();
-      appendImageMarkup(images);
-    })
-    .catch(error => console.log(error));
+  try {
+    const images = await aImageApiService.fetchCountries();
+    clearGalleryContainer();
+    loadMoreBtn.show();
+    appendImageMarkupAndEnableBtn(images);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function onLoadMore() {
+async function onLoadMore() {
   loadMoreBtn.disable();
 
-  imageApiService
-    .fetchCountries()
-    .then(images => {
-      loadMoreBtn.enable();
-      appendImageMarkup(images);
+  try {
+    const images = await aImageApiService.fetchCountries();
+    appendImageMarkupAndEnableBtn(images);
+    onScroll();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-      onScroll();
-    })
-    .catch(error => console.log(error));
+function appendImageMarkupAndEnableBtn(data) {
+  loadMoreBtn.enable();
+  appendImageMarkup(data);
 }
 
 function clearGalleryContainer() {
