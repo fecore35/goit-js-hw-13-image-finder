@@ -1,6 +1,6 @@
 {{#each this}}
   <li class='photo-card grid__item'>
-    <img class="photo-card__image"" src='{{webformatURL}}' alt='' width='285' height='180' />
+    <img class='photo-card__image' src='{{webformatURL}}' alt='' width='285' height='180' />
 
     <div class='stats'>
       <p class='stats-item'>
@@ -20,6 +20,11 @@
         {{downloads}}
       </p>
     </div>
-    <a class="photo-card__link" href="{{largeImageURL}}" target="_blank" ref="noopener nofollow"></a>
+    <a
+      class='photo-card__link'
+      href='{{largeImageURL}}'
+      target='_blank'
+      ref='noopener nofollow'
+    ></a>
   </li>
 {{/each}}

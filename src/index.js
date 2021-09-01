@@ -4,7 +4,7 @@ import getRefs from './js/refs';
 import AsyncImageApiService from './js/async-apiService';
 import LoadMoreBtn from './js/loadMoreBtn';
 import lightboxImage from './js/modal';
-import tplImage from './templates/cart-image.hbs';
+import tplImage from './templates/card-image.hbs';
 import './sass/main.scss';
 
 const refs = getRefs();
