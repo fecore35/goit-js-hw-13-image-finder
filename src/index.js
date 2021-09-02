@@ -11,16 +11,17 @@ const refs = getRefs();
 const aImageApiService = new AsyncImageApiService();
 const loadMoreBtn = new LoadMoreBtn({ selector: '#load-more', hidden: true });
 
-refs.searchForm.addEventListener('submit', e => {
-  e.preventDefault();
+refs.searchForm.addEventListener('submit', event => {
+  event.preventDefault();
+  onSearch(event);
 });
 
-refs.searchForm.addEventListener('input', debounce(onSearch, 350));
+// refs.searchForm.addEventListener('input', debounce(onSearch, 350));
 refs.galleryContainer.addEventListener('click', onModal);
 loadMoreBtn.button.addEventListener('click', onLoadMore);
 
 async function onSearch(event) {
-  aImageApiService.query = event.target.value;
+  aImageApiService.query = event.target.elements.query.value;
 
   loadMoreBtn.show();
   loadMoreBtn.disable();
